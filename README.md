@@ -5,7 +5,18 @@ By: Jen Wadkins
 
 ## Introduction
 
->This is an in-depth notebook which explores the King County Housing Dataset through several different models. The notebook includes a thorough EDA and cleaning section, study of different models using different categorical methods (one-hot encoding vs target encoding) with extensive parameter tuning, an exploration of different feature selection methods, an evaluation of the final model, and visualizations.
+> This is an in-depth notebook which explores the King County Housing Dataset through several different models. The notebook includes a thorough EDA and cleaning section, numerous visualizations, exploration of different models, feature selection and engineering methods, and a model stack to create the final model.
+
+> You can read my tutorial about simple model stacking on Medium: https://towardsdatascience.com/simple-model-stacking-explained-and-automated-1b54e4357916
+
+## Skills Presented
+
+* Data Cleaning
+* Exploratory Data Analyis
+* Data Visualization
+* Feature Selection and Engineering
+* Model Selection and Tuning
+* Model Stacking
 
 ## Questions
 
@@ -13,73 +24,67 @@ By: Jen Wadkins
 * Can we effectively use a regression model based system for realtors to determine a proper list price?
 
 ## Methodology
-* Source data from King County
-* Clean and prepare data for model processing
-* Perform EDA on data
-* Process data with a variety of models to find the most effective model, also exploring different categorical methods and feature selection
+
+We use the OSEMN for Data Science to organize the project.
+* Obtain Data: Source data from King County
+* Scrubbing/Cleaning Data: Clean and prepare data for model processing
+* Exploring/Visualizing the Data: Perform EDA on data
+* Model: Iteratively explore different models
+* Analysis: Analyze and explain results
 
 
 # Table of Contents
 
-#### [king_count_housing.ipynb](https://github.com/threnjen/king_county_housing/blob/main/king_county_housing.ipynb)
+#### [king_county_streamlined.ipynb.ipynb](https://github.com/threnjen/king_county_housing/blob/main/king_county_streamlined.ipynb)
 
-* **Business Objective**
+* **Project Overview**
+    * Table of Contents
+    * Objective
+    * Package Imports
+    * Notebook Functions
 
+* **Obtaining our Data**
 
-* **Notebook Preparation**
-    * Importing our Modules
+* **Scrubbing/Cleaning Data**
+    * Checking Time Series
+    * Duplicate Data
+    * Outlier Detection
+    * Binary Data
 
-
-* **Preprocessing**
-    * EDA and Cleaning
-        * Scaling Time Series
-        * Duplicates
-        * Outlier Detection
-        * Missing Data
-        * Binary Data
-        * Visualize Cleaned Data
-        * Studying our Target Variable
+* **Exploring/Visualizing Data**
+    * Study Target Variable
     * Create Holdout Set
     * Feature Engineering
     * Correlations and Multicollinearity
-    * EDA & Process Train Set
-        * Categoricals
-        * Continuous
-            * Find Interactions
-            * Transform and Standardize Continuous Data
-            * Add Polynomial Features
+    * Polynomial Relationships
+    * Visualize Categoricals
+    * Visualize Continuous
+    * Feature Interactions
+
+* **Cleaning Final Data**
+    * Standardize and Transform
+    * Add Polynomial Features
     * Process Test Set
-        * Categoricals
-        * Continuous
-    * Create Train/Test Split
+    * Create Train/Test Final Set
 
+* **Modeling**
+    * Spot Check Models
+        * Feature Selectors
+        * Spot Check Evaluation
+    * Final Model Setup
+        * Prepare Testing Assets
+        * Get OOF Predictions
+        * Run Stack Selector
+        * Prepare Final Assets
+    * Final Model Evaluation
 
-* **Model Explorations**
-    * Picking our Base Features
-    * Linear Regressions
-        * Basic LR with Top Features One-Hot Encoded
-        * Basic LR with Top Features Target Encoded
-        * LR with ALL model features
-        * Linear Regression with various Feature Selection Methods
-            * Forward-Backward Selector
-            * Permutation Importance
-            * RFECV
-    * K-Nearest Neighbors
-    * Support Vector Regression
-    * XGBoost Model
-        * One Hot Encoded
-        * Target Encoded
-
-
-* **Model Selection and Analysis**
-
-* **Additional Visualizations**
+* **Analysis**
 
 * **APPENDIX**
 
 ## Analysis
 
-> Our final model utilizes a combination of continuous variables and one-hot-encoded categoricals to produce a support vector machine regression with R^2 of 89.3%, a mean absolute error of 52k, and a root mean squared error of 78k. I tried several different zip code transformations including polynomial features, mean target encoding, lower-granularity binning, and median rank as a continuous, and ALL of these efforts resulted in a lower R^2 and higher mean absolute error, leading to a final decision to one-hot encode all 70 zip codes individually. Similar efforts on other categoricals such as age and month sold also did not improve the model over one-hot encoding. This resulted in the greatest accuracy despite a model that is more "messy" with a large number of features.
+> Our final model utilizes a combination of continuous variables and one-hot-encoded categoricals to produce a stacked model with R^2 of 89.78%, a mean absolute error of 47.2k, and a root mean squared error of 74k. I tried several different zip code transformations including polynomial features, mean target encoding, lower-granularity binning, and median rank as a continuous, and ALL of these efforts resulted in a lower R^2 and higher mean absolute error, leading to a final decision to one-hot encode all 70 zip codes individually. Similar efforts on other categoricals such as age and month sold also did not improve the model over one-hot encoding. This resulted in the greatest accuracy despite a model that is more "messy" with a large number of features.
 
 ### What are the primary factors influencing housing prices in the King County metro area?
 > As square footage increases so does quality of materials. Most importantly you can see the upward price trend with both increased square footage and materials grade. I was intrigued that our lower bound of data points is very linear, but as our square footage increases, the upper bound gradually breaks away with higher variance. 
@@ -94,7 +99,7 @@ By: Jen Wadkins
 > These three features alone explain 85% of the price variance.
 
 ### Can we effectively use a regression model based system for realtors to determine a proper list price?
-> Our model, while explaining over 89.3% of the price variance with our features, was nonetheless far from accurate in absolute terms. A mean average error of 52k in either direction is a huge variance to a home price - one that is so large that it renders the prediction much less meaningful and useful. Other models need to be explored, better data needs to be sourced, or easy-to-use features that an average realtor is capable of evaluating/acquiring should be added to the model to improve its predictive quality. The model is providing at best a baseline starting point.
+> Our model, while explaining over 89.78% of the price variance with our features, was nonetheless far from accurate in absolute terms. A mean average error of 47.2k in either direction is a huge variance to a home price - one that is so large that it renders the prediction much less meaningful and useful. Other models need to be explored, better data needs to be sourced, or easy-to-use features that an average realtor is capable of evaluating/acquiring should be added to the model to improve its predictive quality. The model is providing at best a baseline starting point.
 
 
 ## Presentation
